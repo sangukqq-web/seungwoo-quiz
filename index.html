@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +8,6 @@
     <title>승우와의 대화 게임</title>
 
     <style>
-        /* =========================================================
-           GLOBAL
-        ========================================================= */
-
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -31,8 +28,8 @@
                 sans-serif;
 
             background:
-                radial-gradient(circle at 20% 20%, rgba(120, 119, 255, .22), transparent 30%),
-                radial-gradient(circle at 80% 80%, rgba(0, 210, 255, .18), transparent 30%),
+                radial-gradient(circle at 20% 20%, rgba(120,119,255,.22), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(0,210,255,.18), transparent 30%),
                 linear-gradient(135deg, #090b17, #10152c 50%, #080b15);
 
             display: flex;
@@ -44,8 +41,6 @@
 
             color: #151827;
         }
-
-        /* 배경 움직임 */
 
         body::before,
         body::after {
@@ -75,18 +70,15 @@
 
         @keyframes floatingOrb {
             from {
-                transform: translate3d(0, 0, 0) scale(1);
+                transform: translate3d(0,0,0) scale(1);
             }
 
             to {
-                transform: translate3d(50px, 35px, 0) scale(1.15);
+                transform: translate3d(50px,35px,0) scale(1.15);
             }
         }
 
-
-        /* =========================================================
-           GAME CONTAINER
-        ========================================================= */
+        /* GAME CONTAINER */
 
         #game-container {
             width: min(400px, calc(100vw - 24px));
@@ -125,8 +117,6 @@
             isolation: isolate;
         }
 
-        /* 위쪽 빛 */
-
         #game-container::before {
             content: "";
             position: absolute;
@@ -136,19 +126,17 @@
 
             top: -150px;
             left: 50%;
+
             transform: translateX(-50%);
 
-            background: rgba(100, 110, 255, .22);
+            background: rgba(100,110,255,.22);
 
             filter: blur(35px);
 
             pointer-events: none;
         }
 
-
-        /* =========================================================
-           SCREEN
-        ========================================================= */
+        /* SCREEN */
 
         .screen {
             display: none;
@@ -170,11 +158,19 @@
         .screen.active {
             display: flex;
 
-            animation: screenEnter .55s cubic-bezier(.22,1,.36,1) forwards;
+            animation:
+                screenEnter
+                .55s
+                cubic-bezier(.22,1,.36,1)
+                forwards;
         }
 
         .screen.screen-exit {
-            animation: screenExit .28s ease forwards;
+            animation:
+                screenExit
+                .28s
+                ease
+                forwards;
         }
 
         @keyframes screenEnter {
@@ -207,10 +203,7 @@
             }
         }
 
-
-        /* =========================================================
-           TITLE
-        ========================================================= */
+        /* TITLE */
 
         h2 {
             margin: 8px 0 0;
@@ -230,9 +223,14 @@
 
             -webkit-background-clip: text;
             background-clip: text;
+
             color: transparent;
 
-            animation: titleFloat 3s ease-in-out infinite;
+            animation:
+                titleFloat
+                3s
+                ease-in-out
+                infinite;
         }
 
         h3 {
@@ -241,11 +239,11 @@
             font-size: 21px;
             font-weight: 850;
 
-            letter-spacing: -0.7px;
+            letter-spacing: -.7px;
         }
 
         @keyframes titleFloat {
-            0%, 100% {
+            0%,100% {
                 transform: translateY(0);
             }
 
@@ -254,13 +252,11 @@
             }
         }
 
-
-        /* =========================================================
-           CHARACTER IMAGE
-        ========================================================= */
+        /* CHARACTER IMAGE */
 
         img.character-img {
             width: auto;
+
             max-width: 250px;
             max-height: 250px;
 
@@ -271,38 +267,48 @@
             margin-bottom: 15px;
 
             filter:
-                drop-shadow(0 15px 20px rgba(0,0,0,.16));
+                drop-shadow(
+                    0 15px 20px rgba(0,0,0,.16)
+                );
 
             transition:
                 transform .35s cubic-bezier(.22,1,.36,1),
                 filter .35s ease;
 
-            animation: characterAppear .65s cubic-bezier(.22,1,.36,1);
+            animation:
+                characterAppear
+                .65s
+                cubic-bezier(.22,1,.36,1);
         }
 
         img.character-img:hover {
-            transform: translateY(-7px) scale(1.025);
+            transform:
+                translateY(-7px)
+                scale(1.025);
 
             filter:
-                drop-shadow(0 20px 28px rgba(55,70,200,.22));
+                drop-shadow(
+                    0 20px 28px rgba(55,70,200,.22)
+                );
         }
 
         @keyframes characterAppear {
             0% {
                 opacity: 0;
-                transform: translateY(25px) scale(.9);
+                transform:
+                    translateY(25px)
+                    scale(.9);
             }
 
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
-
-        /* =========================================================
-           SPEECH BUBBLE
-        ========================================================= */
+        /* SPEECH BUBBLE */
 
         .speech-bubble {
             background:
@@ -312,7 +318,9 @@
                     rgba(239,244,255,.98)
                 );
 
-            border: 1px solid rgba(90,120,255,.10);
+            border:
+                1px solid
+                rgba(90,120,255,.10);
 
             border-radius: 18px;
 
@@ -337,7 +345,10 @@
 
             word-break: keep-all;
 
-            animation: bubbleAppear .5s cubic-bezier(.22,1,.36,1);
+            animation:
+                bubbleAppear
+                .5s
+                cubic-bezier(.22,1,.36,1);
         }
 
         .speech-bubble::after {
@@ -357,26 +368,32 @@
                 translateX(-50%)
                 rotate(45deg);
 
-            border-right: 1px solid rgba(90,120,255,.08);
-            border-bottom: 1px solid rgba(90,120,255,.08);
+            border-right:
+                1px solid
+                rgba(90,120,255,.08);
+
+            border-bottom:
+                1px solid
+                rgba(90,120,255,.08);
         }
 
         @keyframes bubbleAppear {
             from {
                 opacity: 0;
-                transform: translateY(10px) scale(.96);
+                transform:
+                    translateY(10px)
+                    scale(.96);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
-
-        /* =========================================================
-           INPUT
-        ========================================================= */
+        /* INPUT */
 
         .input-box {
             width: 82%;
@@ -389,7 +406,8 @@
             font-weight: 650;
 
             border:
-                1px solid rgba(120,130,160,.28);
+                1px solid
+                rgba(120,130,160,.28);
 
             border-radius: 13px;
 
@@ -425,10 +443,7 @@
             transform: translateY(-1px);
         }
 
-
-        /* =========================================================
-           BUTTON
-        ========================================================= */
+        /* BUTTON */
 
         .btn {
             position: relative;
@@ -511,21 +526,21 @@
         }
 
         .btn:active {
-            transform: translateY(1px) scale(.98);
+            transform:
+                translateY(1px)
+                scale(.98);
 
             box-shadow:
                 0 4px 10px rgba(82,97,255,.2);
         }
 
-
-        /* =========================================================
-           OPTIONS
-        ========================================================= */
+        /* OPTIONS */
 
         .options-container {
             width: 100%;
 
             display: flex;
+
             flex-direction: column;
 
             align-items: center;
@@ -535,7 +550,10 @@
 
         .options-container .btn {
             animation:
-                optionAppear .45s cubic-bezier(.22,1,.36,1) both;
+                optionAppear
+                .45s
+                cubic-bezier(.22,1,.36,1)
+                both;
         }
 
         .options-container .btn:nth-child(1) {
@@ -557,23 +575,26 @@
         @keyframes optionAppear {
             from {
                 opacity: 0;
-                transform: translateY(14px) scale(.96);
+                transform:
+                    translateY(14px)
+                    scale(.96);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
-
-        /* =========================================================
-           START SCREEN
-        ========================================================= */
+        /* START */
 
         #screen-start > div {
             transition:
-                transform .35s cubic-bezier(.22,1,.36,1);
+                transform
+                .35s
+                cubic-bezier(.22,1,.36,1);
         }
 
         #screen-start > div:hover {
@@ -584,12 +605,18 @@
             cursor: pointer;
 
             animation:
-                characterAppear .7s cubic-bezier(.22,1,.36,1),
-                startImageFloat 3.2s ease-in-out .7s infinite;
+                characterAppear
+                .7s
+                cubic-bezier(.22,1,.36,1),
+                startImageFloat
+                3.2s
+                ease-in-out
+                .7s
+                infinite;
         }
 
         @keyframes startImageFloat {
-            0%, 100% {
+            0%,100% {
                 transform: translateY(0);
             }
 
@@ -598,13 +625,11 @@
             }
         }
 
-
-        /* =========================================================
-           QUIZ
-        ========================================================= */
+        /* QUIZ */
 
         #screen-quiz {
             justify-content: flex-start;
+
             gap: 5px;
 
             overflow-y: auto;
@@ -625,7 +650,11 @@
             font-size: 19px;
 
             background:
-                linear-gradient(90deg,#4654ff,#963fff);
+                linear-gradient(
+                    90deg,
+                    #4654ff,
+                    #963fff
+                );
 
             -webkit-background-clip: text;
             background-clip: text;
@@ -644,13 +673,17 @@
 
         #quiz-feedback {
             animation:
-                feedbackAppear .4s cubic-bezier(.22,1,.36,1);
+                feedbackAppear
+                .4s
+                cubic-bezier(.22,1,.36,1);
         }
 
         @keyframes feedbackAppear {
             0% {
                 opacity: 0;
-                transform: scale(.9) translateY(10px);
+                transform:
+                    scale(.9)
+                    translateY(10px);
             }
 
             70% {
@@ -659,21 +692,23 @@
 
             100% {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform:
+                    scale(1)
+                    translateY(0);
             }
         }
 
-
-        /* =========================================================
-           WRONG / CORRECT SHAKE
-        ========================================================= */
+        /* SHAKE */
 
         .shake {
-            animation: shake .42s ease;
+            animation:
+                shake
+                .42s
+                ease;
         }
 
         @keyframes shake {
-            0%, 100% {
+            0%,100% {
                 transform: translateX(0);
             }
 
@@ -694,10 +729,7 @@
             }
         }
 
-
-        /* =========================================================
-           CLICK RIPPLE
-        ========================================================= */
+        /* RIPPLE */
 
         .ripple {
             position: absolute;
@@ -706,9 +738,13 @@
 
             transform: scale(0);
 
-            background: rgba(255,255,255,.5);
+            background:
+                rgba(255,255,255,.5);
 
-            animation: ripple .55s linear;
+            animation:
+                ripple
+                .55s
+                linear;
 
             pointer-events: none;
         }
@@ -720,10 +756,7 @@
             }
         }
 
-
-        /* =========================================================
-           MOBILE
-        ========================================================= */
+        /* MOBILE */
 
         @media (max-width: 480px) {
 
@@ -733,7 +766,9 @@
 
             #game-container {
                 width: 100%;
-                height: calc(100dvh - 24px);
+
+                height:
+                    calc(100dvh - 24px);
 
                 min-height: 0;
 
@@ -754,7 +789,9 @@
             }
 
             img.character-img {
-                max-width: min(220px, 68vw);
+                max-width:
+                    min(220px,68vw);
+
                 max-height: 205px;
             }
 
@@ -767,7 +804,9 @@
 
                 font-size: 15px;
 
-                padding: 13px 14px;
+                padding:
+                    13px
+                    14px;
             }
 
             .btn {
@@ -777,7 +816,9 @@
 
                 font-size: 15px;
 
-                padding: 12px 14px;
+                padding:
+                    12px
+                    14px;
             }
 
             .input-box {
@@ -787,8 +828,7 @@
             }
         }
 
-
-        /* 아주 작은 휴대폰 */
+        /* SMALL PHONE */
 
         @media (max-height: 650px) {
 
@@ -809,25 +849,29 @@
             }
 
             .speech-bubble {
-                padding: 10px 12px;
+                padding:
+                    10px
+                    12px;
             }
 
             .btn {
                 min-height: 42px;
-                padding: 9px 14px;
+
+                padding:
+                    9px
+                    14px;
             }
         }
 
-
-        /* =========================================================
-           TOUCH DEVICES
-        ========================================================= */
+        /* TOUCH */
 
         @media (hover: none) {
 
             .btn:hover {
                 transform: none;
+
                 filter: none;
+
                 box-shadow:
                     0 7px 18px rgba(82,97,255,.25),
                     inset 0 1px 0 rgba(255,255,255,.25);
@@ -842,38 +886,47 @@
             }
         }
 
-
-        /* =========================================================
-           REDUCED MOTION
-        ========================================================= */
+        /* REDUCED MOTION */
 
         @media (prefers-reduced-motion: reduce) {
 
             *,
             *::before,
             *::after {
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
             }
         }
     </style>
 </head>
-
 
 <body>
 
 <div id="game-container">
 
     <!-- START 화면 -->
-    <div id="screen-start" class="screen active">
+
+    <div
+        id="screen-start"
+        class="screen active"
+    >
 
         <h2>승우 게임</h2>
 
         <div
-            style="position: relative; cursor: pointer;"
+            style="
+                position:relative;
+                cursor:pointer;
+            "
             onclick="goToNameInput()"
         >
+
             <div class="speech-bubble">
                 나를 눌러봐!
             </div>
@@ -883,13 +936,18 @@
                 alt="첫번째 사진"
                 class="character-img"
             >
+
         </div>
 
     </div>
 
 
-    <!-- 이름 입력 화면 -->
-    <div id="screen-name" class="screen">
+    <!-- 이름 입력 -->
+
+    <div
+        id="screen-name"
+        class="screen"
+    >
 
         <h3>이름을 입력하시오</h3>
 
@@ -911,8 +969,12 @@
     </div>
 
 
-    <!-- 대화 화면 -->
-    <div id="screen-dialog" class="screen">
+    <!-- 대화 -->
+
+    <div
+        id="screen-dialog"
+        class="screen"
+    >
 
         <img
             src="photo1.png"
@@ -931,14 +993,17 @@
             id="dialog-options"
             class="options-container"
         >
-            <!-- 선택지 버튼이 여기에 동적으로 추가됨 -->
         </div>
 
     </div>
 
 
-    <!-- 퀴즈 화면 -->
-    <div id="screen-quiz" class="screen">
+    <!-- 퀴즈 -->
+
+    <div
+        id="screen-quiz"
+        class="screen"
+    >
 
         <h3 id="quiz-title">
             문제
@@ -976,7 +1041,10 @@
         <div
             id="quiz-feedback"
             class="speech-bubble"
-            style="display:none; margin-top:10px;"
+            style="
+                display:none;
+                margin-top:10px;
+            "
         ></div>
 
         <button
@@ -996,120 +1064,162 @@
 <script>
 
     let userName = "";
+
     let currentQuizStage = 1;
 
 
-    /* =========================================================
-       IMAGE
-    ========================================================= */
+    /* IMAGE */
 
     const images = {
+
         photo1: "photo1.png",
+
         photo2: "photo2.png",
+
         photo3: "photo3.png",
+
         photo4: "photo4.png"
+
     };
 
 
-    /* =========================================================
-       SCREEN TRANSITION
-       기존 화면 전환 기능을 유지하면서 애니메이션만 추가
-    ========================================================= */
+    /* SCREEN TRANSITION */
 
     function showScreen(screenId) {
 
         const currentScreen =
-            document.querySelector(".screen.active");
+            document.querySelector(
+                ".screen.active"
+            );
 
         const nextScreen =
-            document.getElementById(screenId);
+            document.getElementById(
+                screenId
+            );
 
-        if (currentScreen === nextScreen) return;
+        if (currentScreen === nextScreen)
+            return;
 
 
         if (currentScreen) {
 
-            currentScreen.classList.add("screen-exit");
+            currentScreen.classList.add(
+                "screen-exit"
+            );
 
             setTimeout(() => {
 
-                currentScreen.classList.remove("active");
-                currentScreen.classList.remove("screen-exit");
+                currentScreen.classList.remove(
+                    "active"
+                );
 
-                nextScreen.classList.add("active");
+                currentScreen.classList.remove(
+                    "screen-exit"
+                );
+
+                nextScreen.classList.add(
+                    "active"
+                );
 
             }, 260);
 
-        } else {
+        }
 
-            nextScreen.classList.add("active");
+        else {
+
+            nextScreen.classList.add(
+                "active"
+            );
 
         }
+
     }
 
 
-    /* =========================================================
-       START
-    ========================================================= */
+    /* START */
 
     function goToNameInput() {
 
-        showScreen("screen-name");
+        showScreen(
+            "screen-name"
+        );
 
         setTimeout(() => {
 
             document
-                .getElementById("user-name-input")
+                .getElementById(
+                    "user-name-input"
+                )
                 .focus();
 
         }, 350);
+
     }
 
 
-    /* =========================================================
-       SAVE NAME
-    ========================================================= */
+    /* SAVE NAME */
 
     function saveName() {
 
         const input =
             document
-                .getElementById("user-name-input")
+                .getElementById(
+                    "user-name-input"
+                )
                 .value
                 .trim();
 
+
         if (input === "") {
 
-            alert("이름을 입력해 주세요!");
+            alert(
+                "이름을 입력해 주세요!"
+            );
 
             const inputBox =
-                document.getElementById("user-name-input");
+                document.getElementById(
+                    "user-name-input"
+                );
 
-            inputBox.classList.add("shake");
+            inputBox.classList.add(
+                "shake"
+            );
 
             setTimeout(() => {
-                inputBox.classList.remove("shake");
+
+                inputBox.classList.remove(
+                    "shake"
+                );
+
             }, 450);
 
             return;
+
         }
+
 
         userName = input;
 
+
         setupInitialDialog();
 
-        showScreen("screen-dialog");
+
+        showScreen(
+            "screen-dialog"
+        );
+
     }
 
 
-    /* =========================================================
-       INITIAL DIALOG
-    ========================================================= */
+    /* INITIAL DIALOG */
 
     function setupInitialDialog() {
 
         const optionsContainer =
-            document.getElementById("dialog-options");
+            document.getElementById(
+                "dialog-options"
+            );
+
 
         optionsContainer.innerHTML = `
 
@@ -1128,26 +1238,30 @@
             </button>
 
         `;
+
     }
 
 
-    /* =========================================================
-       DIALOG
-    ========================================================= */
+    /* DIALOG */
 
     function chooseOption(optionNum) {
 
         const dialogText =
-            document.getElementById("dialog-text");
+            document.getElementById(
+                "dialog-text"
+            );
 
         const optionsContainer =
-            document.getElementById("dialog-options");
+            document.getElementById(
+                "dialog-options"
+            );
 
 
         if (optionNum === 1) {
 
             dialogText.innerText =
                 `오 너 이름은 ${userName}이구나`;
+
 
             optionsContainer.innerHTML = `
 
@@ -1162,10 +1276,12 @@
 
         }
 
+
         else if (optionNum === 2) {
 
             dialogText.innerText =
                 "말 좆같이 하네 고아새끼";
+
 
             optionsContainer.innerHTML = `
 
@@ -1177,47 +1293,58 @@
                 </button>
 
             `;
+
         }
+
     }
 
 
-    /* =========================================================
-       BAD END
-    ========================================================= */
+    /* BAD END */
 
     function sayBadWord() {
 
-        alert("대화가 종료되었습니다.");
+        alert(
+            "대화가 종료되었습니다."
+        );
 
         location.reload();
+
     }
 
 
-    /* =========================================================
-       QUESTION
-    ========================================================= */
+    /* QUESTION */
 
     function askQuestion() {
 
         const dialogText =
-            document.getElementById("dialog-text");
+            document.getElementById(
+                "dialog-text"
+            );
 
         const optionsContainer =
-            document.getElementById("dialog-options");
+            document.getElementById(
+                "dialog-options"
+            );
 
 
         const randomAnswers = [
+
             "sex",
+
             "야동",
+
             "니엄마",
+
             "꺼져"
+
         ];
 
 
         const randomChoice =
             randomAnswers[
                 Math.floor(
-                    Math.random() * randomAnswers.length
+                    Math.random() *
+                    randomAnswers.length
                 )
             ];
 
@@ -1236,165 +1363,265 @@
             </button>
 
         `;
+
     }
 
 
-    /* =========================================================
-       QUIZ DATA
-       ★ 여기 내용은 기존 코드 그대로
-    ========================================================= */
+    /* QUIZ DATA */
 
     const quizzes = {
 
         1: {
-            title: "스테이지 1 - 문제 1",
-            image: images.photo2,
-            question: "내가 좋아하는 행위는?",
+
+            title:
+                "스테이지 1 - 문제 1",
+
+            image:
+                images.photo2,
+
+            question:
+                "내가 좋아하는 행위는?",
+
             answers: [
+
                 "sex",
+
                 "섹스",
+
                 "야한 얘기하기",
+
                 "야동 시청"
+
             ],
+
             wrongMsg:
                 "에휴 친구란 놈이 그것도 못 맞추냐. 한심하노",
+
             correctMsg:
                 "넌 역시 내 친구구나 아마 우린 취향이 같나봐! 다음문제로 넘어가!"
+
         },
+
 
         2: {
-            title: "스테이지 2 - 문제 2",
-            image: images.photo3,
-            question: "내가 좋아하는 아이돌은?",
+
+            title:
+                "스테이지 2 - 문제 2",
+
+            image:
+                images.photo3,
+
+            question:
+                "내가 좋아하는 아이돌은?",
+
             answers: [
+
                 "스텔라이브",
+
                 "스텔",
+
                 "아라하시 타비",
+
                 "타비"
+
             ],
+
             wrongMsg:
                 "난 널 믿었는데 너무 속상해 저리 꺼져",
+
             correctMsg:
                 "너도 버츄얼을 좋아하는구나!! 나랑 사귀자!! 우린 천생연분이야"
+
         },
+
 
         3: {
-            title: "스테이지 3 - 문제 3",
-            image: images.photo3,
-            question: "내가 좋아하는 여자는 누구일까?",
+
+            title:
+                "스테이지 3 - 문제 3",
+
+            image:
+                images.photo3,
+
+            question:
+                "내가 좋아하는 여자는 누구일까?",
+
             answers: [
+
                 "아라하시 타비",
+
                 "타비",
+
                 "모두",
+
                 "후야"
+
             ],
+
             wrongMsg:
                 "맞아 내가 좋아하는 사람은 바로 너였어. 사랑해",
+
             correctMsg:
                 "와 ㄹㅇ 어케 맞춤? 님도 내가 좋아하는 여자에 추가해드림"
+
         },
 
+
         4: {
-            title: "스테이지 4 - 문제 4",
-            image: images.photo4,
-            question: "내 키가 몇인지 맞춰봐!",
+
+            title:
+                "스테이지 4 - 문제 4",
+
+            image:
+                images.photo4,
+
+            question:
+                "내 키가 몇인지 맞춰봐!",
+
             answers: [
+
                 "150",
+
                 "0",
+
                 "151",
+
                 "152",
+
                 "153",
+
                 "154",
+
                 "155",
+
                 "156",
+
                 "157",
+
                 "158"
+
             ],
+
             wrongMsg:
                 "야이 시발련아 내 키가 그정도인줄 아냐?",
+
             correctMsg:
                 "내가 낸 모든 문제를 맞췄구나!! 당장 결혼하자!!"
+
         }
 
     };
 
 
-    /* =========================================================
-       START QUIZ
-    ========================================================= */
+    /* START QUIZ */
 
     function startQuiz() {
 
         currentQuizStage = 1;
 
-        loadQuiz(currentQuizStage);
+        loadQuiz(
+            currentQuizStage
+        );
 
-        showScreen("screen-quiz");
+        showScreen(
+            "screen-quiz"
+        );
+
     }
 
 
-    /* =========================================================
-       LOAD QUIZ
-    ========================================================= */
+    /* LOAD QUIZ */
 
     function loadQuiz(stage) {
 
-        const quiz = quizzes[stage];
+        const quiz =
+            quizzes[stage];
 
 
         document
-            .getElementById("quiz-title")
-            .innerText = quiz.title;
+            .getElementById(
+                "quiz-title"
+            )
+            .innerText =
+            quiz.title;
 
 
         document
-            .getElementById("quiz-img")
-            .src = quiz.image;
+            .getElementById(
+                "quiz-img"
+            )
+            .src =
+            quiz.image;
 
 
         document
-            .getElementById("quiz-question")
-            .innerText = quiz.question;
+            .getElementById(
+                "quiz-question"
+            )
+            .innerText =
+            quiz.question;
 
 
         document
-            .getElementById("quiz-answer-input")
+            .getElementById(
+                "quiz-answer-input"
+            )
             .value = "";
 
 
         const feedback =
-            document.getElementById("quiz-feedback");
+            document.getElementById(
+                "quiz-feedback"
+            );
+
 
         const nextBtn =
-            document.getElementById("next-stage-btn");
+            document.getElementById(
+                "next-stage-btn"
+            );
 
 
-        feedback.style.display = "none";
+        feedback.style.display =
+            "none";
 
-        nextBtn.style.display = "none";
+
+        nextBtn.style.display =
+            "none";
 
 
-        /* 이미지 새로 등장하는 효과 */
+        /* 이미지 애니메이션 */
 
         const img =
-            document.getElementById("quiz-img");
+            document.getElementById(
+                "quiz-img"
+            );
 
-        img.style.animation = "none";
+
+        img.style.animation =
+            "none";
+
 
         void img.offsetWidth;
+
 
         img.style.animation =
             "characterAppear .65s cubic-bezier(.22,1,.36,1)";
 
 
-        /* 질문도 새로 등장 */
+        /* 질문 애니메이션 */
 
         const question =
-            document.getElementById("quiz-question");
+            document.getElementById(
+                "quiz-question"
+            );
 
-        question.style.animation = "none";
+
+        question.style.animation =
+            "none";
+
 
         void question.offsetWidth;
+
 
         question.style.animation =
             "bubbleAppear .5s cubic-bezier(.22,1,.36,1)";
@@ -1403,83 +1630,119 @@
         setTimeout(() => {
 
             document
-                .getElementById("quiz-answer-input")
+                .getElementById(
+                    "quiz-answer-input"
+                )
                 .focus();
 
         }, 350);
+
     }
 
 
-    /* =========================================================
-       SUBMIT ANSWER
-    ========================================================= */
+    /* SUBMIT ANSWER */
 
     function submitAnswer() {
 
         const inputAnswer =
             document
-                .getElementById("quiz-answer-input")
+                .getElementById(
+                    "quiz-answer-input"
+                )
                 .value
                 .trim();
 
 
         const quiz =
-            quizzes[currentQuizStage];
+            quizzes[
+                currentQuizStage
+            ];
 
 
         const feedback =
-            document.getElementById("quiz-feedback");
+            document.getElementById(
+                "quiz-feedback"
+            );
 
 
         const nextBtn =
-            document.getElementById("next-stage-btn");
+            document.getElementById(
+                "next-stage-btn"
+            );
 
+
+        const input =
+            document.getElementById(
+                "quiz-answer-input"
+            );
+
+
+        /* 빈칸 */
 
         if (inputAnswer === "") {
 
-            alert("정답을 입력하세요!");
+            alert(
+                "정답을 입력하세요!"
+            );
 
-            const input =
-                document.getElementById(
-                    "quiz-answer-input"
-                );
-
-            input.classList.add("shake");
+            input.classList.add(
+                "shake"
+            );
 
             setTimeout(() => {
-                input.classList.remove("shake");
+
+                input.classList.remove(
+                    "shake"
+                );
+
             }, 450);
 
+            input.focus();
+
             return;
+
         }
 
 
-        feedback.style.display = "block";
+        /* 피드백 표시 */
+
+        feedback.style.display =
+            "block";
 
 
-        /* 애니메이션 재시작 */
+        feedback.style.animation =
+            "none";
 
-        feedback.style.animation = "none";
 
         void feedback.offsetWidth;
+
 
         feedback.style.animation =
             "feedbackAppear .4s cubic-bezier(.22,1,.36,1)";
 
 
-        if (quiz.answers.includes(inputAnswer)) {
+        /* =====================================
+           정답
+        ===================================== */
+
+        if (
+            quiz.answers.includes(
+                inputAnswer
+            )
+        ) {
 
             feedback.innerText =
                 quiz.correctMsg;
 
 
-            if (currentQuizStage < 4) {
+            /* 정답일 때만 다음 버튼 표시 */
+
+            if (
+                currentQuizStage < 4
+            ) {
 
                 nextBtn.innerText =
                     "다음 문제로 →";
-
-                nextBtn.style.display =
-                    "block";
 
             }
 
@@ -1488,11 +1751,23 @@
                 nextBtn.innerText =
                     "게임 완료 (처음으로)";
 
-                nextBtn.style.display =
-                    "block";
             }
 
+
+            nextBtn.style.display =
+                "block";
+
+
+            /* 정답 입력창 잠금 */
+
+            input.disabled = true;
+
         }
+
+
+        /* =====================================
+           오답
+        ===================================== */
 
         else {
 
@@ -1500,128 +1775,267 @@
                 quiz.wrongMsg;
 
 
-            nextBtn.innerText =
-                "다시 시도 / 다음으로";
+            /* ⭐ 핵심 ⭐ */
+
+            /*
+                틀렸을 때는 절대로
+                다음 문제 버튼을 보여주지 않는다.
+            */
 
             nextBtn.style.display =
-                "block";
+                "none";
+
+
+            /*
+                입력창을 다시 활성화
+            */
+
+            input.disabled = false;
+
+
+            /*
+                기존 답 삭제
+            */
+
+            input.value = "";
+
+
+            /*
+                오답 흔들림 효과
+            */
+
+            input.classList.remove(
+                "shake"
+            );
+
+
+            void input.offsetWidth;
+
+
+            input.classList.add(
+                "shake"
+            );
+
+
+            setTimeout(() => {
+
+                input.classList.remove(
+                    "shake"
+                );
+
+            }, 450);
+
+
+            /*
+                다시 입력 가능
+            */
+
+            setTimeout(() => {
+
+                input.focus();
+
+            }, 100);
+
         }
+
     }
 
 
-    /* =========================================================
-       NEXT QUIZ
-    ========================================================= */
+    /* NEXT QUIZ */
 
     function nextQuizStage() {
 
-        if (currentQuizStage < 4) {
+        /*
+            안전장치:
+
+            정답을 맞힌 상태에서만
+            다음 문제 버튼이 작동하도록 한다.
+        */
+
+        const input =
+            document.getElementById(
+                "quiz-answer-input"
+            );
+
+
+        /*
+            입력창이 비활성화되어 있지 않다면
+            아직 정답을 맞힌 상태가 아니므로
+            이동하지 않는다.
+        */
+
+        if (
+            !input.disabled
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            currentQuizStage < 4
+        ) {
 
             currentQuizStage++;
 
-            loadQuiz(currentQuizStage);
+            loadQuiz(
+                currentQuizStage
+            );
 
         }
 
         else {
 
             alert(
-                "게임 클리어!! 승우와 결혼 축하합니다!!"
+                "게임 클리어!! 승우와 결혼 축하합니다!! 승우: 우리 결혼은 당장 중국으로 떠날 것"
             );
 
             location.reload();
+
         }
+
     }
 
 
-    /* =========================================================
-       ENTER KEY SUPPORT
-       모바일/PC 둘 다 편하게 사용
-    ========================================================= */
+    /* ENTER KEY SUPPORT */
 
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key !== "Enter") return;
-
-
-        const nameScreen =
-            document.getElementById("screen-name");
-
-        const quizScreen =
-            document.getElementById("screen-quiz");
+            if (
+                event.key !== "Enter"
+            )
+                return;
 
 
-        if (nameScreen.classList.contains("active")) {
+            const nameScreen =
+                document.getElementById(
+                    "screen-name"
+                );
 
-            saveName();
+
+            const quizScreen =
+                document.getElementById(
+                    "screen-quiz"
+                );
+
+
+            if (
+                nameScreen.classList.contains(
+                    "active"
+                )
+            ) {
+
+                saveName();
+
+            }
+
+            else if (
+                quizScreen.classList.contains(
+                    "active"
+                )
+            ) {
+
+                /*
+                    정답을 맞혀서
+                    입력창이 disabled라면
+                    Enter로 다음 문제로 가지 않음
+                */
+
+                if (
+                    !document
+                        .getElementById(
+                            "quiz-answer-input"
+                        )
+                        .disabled
+                ) {
+
+                    submitAnswer();
+
+                }
+
+            }
 
         }
-
-        else if (quizScreen.classList.contains("active")) {
-
-            submitAnswer();
-
-        }
-
-    });
+    );
 
 
-    /* =========================================================
-       BUTTON RIPPLE EFFECT
-    ========================================================= */
+    /* BUTTON RIPPLE */
 
-    document.addEventListener("click", function(event) {
+    document.addEventListener(
+        "click",
+        function(event) {
 
-        const button =
-            event.target.closest(".btn");
-
-
-        if (!button) return;
-
-
-        const ripple =
-            document.createElement("span");
+            const button =
+                event.target.closest(
+                    ".btn"
+                );
 
 
-        ripple.className = "ripple";
+            if (!button)
+                return;
 
 
-        const rect =
-            button.getBoundingClientRect();
+            const ripple =
+                document.createElement(
+                    "span"
+                );
 
 
-        const size =
-            Math.max(
-                rect.width,
-                rect.height
+            ripple.className =
+                "ripple";
+
+
+            const rect =
+                button.getBoundingClientRect();
+
+
+            const size =
+                Math.max(
+                    rect.width,
+                    rect.height
+                );
+
+
+            ripple.style.width =
+                size + "px";
+
+
+            ripple.style.height =
+                size + "px";
+
+
+            ripple.style.left =
+                (
+                    event.clientX -
+                    rect.left -
+                    size / 2
+                ) + "px";
+
+
+            ripple.style.top =
+                (
+                    event.clientY -
+                    rect.top -
+                    size / 2
+                ) + "px";
+
+
+            button.appendChild(
+                ripple
             );
 
 
-        ripple.style.width = size + "px";
-        ripple.style.height = size + "px";
+            setTimeout(() => {
 
+                ripple.remove();
 
-        ripple.style.left =
-            (event.clientX - rect.left - size / 2)
-            + "px";
+            }, 600);
 
-
-        ripple.style.top =
-            (event.clientY - rect.top - size / 2)
-            + "px";
-
-
-        button.appendChild(ripple);
-
-
-        setTimeout(() => {
-
-            ripple.remove();
-
-        }, 600);
-
-    });
-
+        }
+    );
 
 </script>
 
