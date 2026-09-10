@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,12 +8,18 @@
     <title>승우와의 대화 게임</title>
 
     <style>
+
+        /* =========================================================
+           BASIC
+        ========================================================= */
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -28,120 +34,194 @@
                 sans-serif;
 
             background:
-                radial-gradient(circle at 20% 20%, rgba(120,119,255,.22), transparent 30%),
-                radial-gradient(circle at 80% 80%, rgba(0,210,255,.18), transparent 30%),
-                linear-gradient(135deg, #090b17, #10152c 50%, #080b15);
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(99,102,241,.28),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(14,165,233,.22),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #070b18,
+                    #111936 52%,
+                    #070b16
+                );
 
             display: flex;
             justify-content: center;
             align-items: center;
 
             min-height: 100dvh;
+
             overflow: hidden;
 
-            color: #151827;
+            color: #161a2d;
         }
+
+
+        /* =========================================================
+           BACKGROUND LIGHT
+        ========================================================= */
 
         body::before,
         body::after {
             content: "";
+
             position: fixed;
-            width: 380px;
-            height: 380px;
+
+            width: 420px;
+            height: 420px;
+
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: .28;
+
+            filter: blur(100px);
+
+            opacity: .22;
+
             pointer-events: none;
-            animation: floatingOrb 9s ease-in-out infinite alternate;
+
+            animation:
+                floatingOrb
+                10s
+                ease-in-out
+                infinite
+                alternate;
         }
 
         body::before {
-            background: #5865ff;
-            top: -180px;
-            left: -150px;
+            background: #6366f1;
+
+            top: -220px;
+            left: -180px;
         }
 
         body::after {
-            background: #00d4ff;
-            right: -170px;
-            bottom: -180px;
-            animation-delay: -4s;
+            background: #06b6d4;
+
+            right: -190px;
+            bottom: -220px;
+
+            animation-delay: -5s;
         }
 
         @keyframes floatingOrb {
+
             from {
-                transform: translate3d(0,0,0) scale(1);
+                transform:
+                    translate3d(0,0,0)
+                    scale(1);
             }
 
             to {
-                transform: translate3d(50px,35px,0) scale(1.15);
+                transform:
+                    translate3d(45px,35px,0)
+                    scale(1.15);
             }
+
         }
 
-        /* GAME CONTAINER */
+
+        /* =========================================================
+           GAME CONTAINER
+        ========================================================= */
 
         #game-container {
-            width: min(400px, calc(100vw - 24px));
-            height: min(600px, calc(100dvh - 24px));
 
-            min-height: 500px;
+            width:
+                min(
+                    430px,
+                    calc(100vw - 28px)
+                );
+
+            height:
+                min(
+                    680px,
+                    calc(100dvh - 28px)
+                );
+
+            min-height: 520px;
 
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.94),
-                    rgba(247,249,255,.91)
+                    160deg,
+                    rgba(255,255,255,.98),
+                    rgba(246,248,255,.96)
                 );
 
-            border: 1px solid rgba(255,255,255,.8);
+            border:
+                1px solid
+                rgba(255,255,255,.9);
 
-            border-radius: 28px;
+            border-radius: 32px;
 
             box-shadow:
-                0 35px 90px rgba(0,0,0,.35),
-                0 10px 35px rgba(0,0,0,.18),
-                inset 0 1px 0 rgba(255,255,255,.9);
+                0 40px 100px rgba(0,0,0,.38),
+                0 15px 40px rgba(0,0,0,.18),
+                inset 0 1px 0 rgba(255,255,255,1);
 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
-            padding: 22px;
+            padding: 24px;
 
             position: relative;
+
             overflow: hidden;
 
             isolation: isolate;
         }
 
+
+        /* 위쪽 빛 */
+
         #game-container::before {
+
             content: "";
+
             position: absolute;
 
-            width: 220px;
-            height: 220px;
+            width: 300px;
+            height: 180px;
 
-            top: -150px;
+            top: -130px;
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
-            background: rgba(100,110,255,.22);
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(99,102,241,.28),
+                    transparent 70%
+                );
 
-            filter: blur(35px);
+            filter: blur(25px);
 
             pointer-events: none;
         }
 
-        /* SCREEN */
+
+        /* =========================================================
+           SCREEN
+        ========================================================= */
 
         .screen {
+
             display: none;
 
             flex-direction: column;
+
             align-items: center;
 
             width: 100%;
@@ -150,78 +230,104 @@
             justify-content: space-between;
 
             position: relative;
+
             z-index: 2;
 
             opacity: 0;
         }
 
         .screen.active {
+
             display: flex;
 
             animation:
                 screenEnter
-                .55s
+                .45s
                 cubic-bezier(.22,1,.36,1)
                 forwards;
         }
 
         .screen.screen-exit {
+
             animation:
                 screenExit
-                .28s
+                .25s
                 ease
                 forwards;
         }
 
         @keyframes screenEnter {
-            0% {
-                opacity: 0;
-                transform: translateY(24px) scale(.97);
-                filter: blur(5px);
-            }
 
-            60% {
-                opacity: 1;
-                filter: blur(0);
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px)
+                    scale(.975);
+
+                filter: blur(4px);
             }
 
             100% {
+
                 opacity: 1;
-                transform: translateY(0) scale(1);
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                filter: blur(0);
             }
+
         }
 
         @keyframes screenExit {
+
             from {
+
                 opacity: 1;
-                transform: translateY(0) scale(1);
+
+                transform:
+                    translateY(0);
             }
 
             to {
+
                 opacity: 0;
-                transform: translateY(-15px) scale(.985);
+
+                transform:
+                    translateY(-12px);
             }
+
         }
 
-        /* TITLE */
+
+        /* =========================================================
+           TITLE
+        ========================================================= */
 
         h2 {
-            margin: 8px 0 0;
 
-            font-size: 30px;
-            font-weight: 900;
+            margin:
+                12px 0 0;
 
-            letter-spacing: -1.5px;
+            font-size: 34px;
+
+            font-weight: 950;
+
+            letter-spacing: -2px;
 
             background:
                 linear-gradient(
                     135deg,
-                    #303cff,
-                    #8a3ffc,
-                    #00a8ff
+                    #4052ff,
+                    #7647ff 55%,
+                    #009eea
                 );
 
             -webkit-background-clip: text;
+
             background-clip: text;
 
             color: transparent;
@@ -234,112 +340,143 @@
         }
 
         h3 {
-            margin: 8px 0;
 
-            font-size: 21px;
-            font-weight: 850;
+            margin:
+                10px 0;
 
-            letter-spacing: -.7px;
+            font-size: 22px;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
         }
 
         @keyframes titleFloat {
+
             0%,100% {
-                transform: translateY(0);
+                transform:
+                    translateY(0);
             }
 
             50% {
-                transform: translateY(-4px);
+                transform:
+                    translateY(-4px);
             }
+
         }
 
-        /* CHARACTER IMAGE */
+
+        /* =========================================================
+           CHARACTER IMAGE
+        ========================================================= */
 
         img.character-img {
+
             width: auto;
 
             max-width: 250px;
+
             max-height: 250px;
 
             object-fit: contain;
 
-            border-radius: 18px;
+            border-radius: 22px;
 
-            margin-bottom: 15px;
+            margin-bottom: 14px;
 
             filter:
                 drop-shadow(
-                    0 15px 20px rgba(0,0,0,.16)
+                    0 18px 25px
+                    rgba(20,30,80,.18)
                 );
 
             transition:
-                transform .35s cubic-bezier(.22,1,.36,1),
-                filter .35s ease;
+                transform .3s ease,
+                filter .3s ease;
 
             animation:
                 characterAppear
-                .65s
+                .6s
                 cubic-bezier(.22,1,.36,1);
         }
 
         img.character-img:hover {
+
             transform:
-                translateY(-7px)
+                translateY(-6px)
                 scale(1.025);
 
             filter:
                 drop-shadow(
-                    0 20px 28px rgba(55,70,200,.22)
+                    0 22px 30px
+                    rgba(50,65,180,.24)
                 );
         }
 
         @keyframes characterAppear {
-            0% {
+
+            from {
+
                 opacity: 0;
+
                 transform:
-                    translateY(25px)
+                    translateY(22px)
                     scale(.9);
             }
 
-            100% {
+            to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0)
                     scale(1);
             }
+
         }
 
-        /* SPEECH BUBBLE */
+
+        /* =========================================================
+           SPEECH BUBBLE
+        ========================================================= */
 
         .speech-bubble {
+
             background:
                 linear-gradient(
-                    135deg,
-                    rgba(230,247,255,.98),
-                    rgba(239,244,255,.98)
+                    145deg,
+                    #f0f7ff,
+                    #eef1ff
                 );
 
             border:
                 1px solid
-                rgba(90,120,255,.10);
+                rgba(90,110,220,.12);
 
-            border-radius: 18px;
+            border-radius: 20px;
 
-            padding: 15px 17px;
+            padding:
+                16px
+                18px;
 
             position: relative;
 
-            width: 90%;
+            width: 92%;
 
             text-align: center;
 
             font-size: 16px;
+
             font-weight: 750;
 
             line-height: 1.55;
 
             box-shadow:
-                0 8px 20px rgba(40,70,150,.08),
-                inset 0 1px 0 rgba(255,255,255,.9);
+                0 10px 25px
+                rgba(40,60,150,.07),
+
+                inset 0 1px 0
+                rgba(255,255,255,.9);
 
             margin-bottom: 10px;
 
@@ -347,22 +484,25 @@
 
             animation:
                 bubbleAppear
-                .5s
+                .45s
                 cubic-bezier(.22,1,.36,1);
         }
 
         .speech-bubble::after {
+
             content: "";
 
             position: absolute;
 
-            bottom: -8px;
+            bottom: -7px;
+
             left: 50%;
 
-            width: 16px;
-            height: 16px;
+            width: 14px;
 
-            background: #eaf6ff;
+            height: 14px;
+
+            background: #eef4ff;
 
             transform:
                 translateX(-50%)
@@ -370,116 +510,156 @@
 
             border-right:
                 1px solid
-                rgba(90,120,255,.08);
+                rgba(90,110,220,.08);
 
             border-bottom:
                 1px solid
-                rgba(90,120,255,.08);
+                rgba(90,110,220,.08);
         }
 
         @keyframes bubbleAppear {
+
             from {
+
                 opacity: 0;
+
                 transform:
-                    translateY(10px)
-                    scale(.96);
+                    translateY(8px)
+                    scale(.97);
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0)
                     scale(1);
             }
+
         }
 
-        /* INPUT */
+
+        /* =========================================================
+           INPUT
+        ========================================================= */
 
         .input-box {
-            width: 82%;
 
-            padding: 13px 15px;
+            width: 88%;
 
-            margin: 10px 0;
+            padding:
+                15px
+                17px;
+
+            margin:
+                10px 0;
 
             font-size: 16px;
-            font-weight: 650;
+
+            font-weight: 700;
 
             border:
-                1px solid
-                rgba(120,130,160,.28);
+                2px solid
+                #e2e5f0;
 
-            border-radius: 13px;
+            border-radius: 15px;
 
             outline: none;
 
             text-align: center;
 
-            background: rgba(255,255,255,.85);
+            background: #fff;
+
+            color: #171a2c;
 
             box-shadow:
-                0 5px 15px rgba(0,0,0,.05);
+                0 5px 16px
+                rgba(20,30,70,.05);
 
             transition:
                 border-color .2s ease,
                 box-shadow .2s ease,
-                transform .2s ease,
-                background .2s ease;
+                transform .2s ease;
         }
 
         .input-box::placeholder {
-            color: #9aa0b3;
+
+            color: #a3a8b9;
         }
 
         .input-box:focus {
-            border-color: #6674ff;
 
-            background: #fff;
+            border-color: #6675ff;
 
             box-shadow:
-                0 0 0 4px rgba(102,116,255,.13),
-                0 8px 20px rgba(70,80,180,.08);
+                0 0 0 4px
+                rgba(102,117,255,.12),
 
-            transform: translateY(-1px);
+                0 8px 20px
+                rgba(60,70,170,.08);
+
+            transform:
+                translateY(-1px);
         }
 
-        /* BUTTON */
+        .input-box:disabled {
+
+            background: #f2f4fa;
+
+            color: #7d8294;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           BUTTON
+        ========================================================= */
 
         .btn {
+
             position: relative;
+
             overflow: hidden;
 
             background:
                 linear-gradient(
                     135deg,
-                    #5261ff,
-                    #714cff
+                    #5063ff,
+                    #7448ff
                 );
 
             color: white;
 
-            padding: 12px 20px;
+            padding:
+                13px
+                20px;
 
             border: none;
 
-            border-radius: 13px;
+            border-radius: 15px;
 
             cursor: pointer;
 
             font-size: 15px;
-            font-weight: 800;
 
-            letter-spacing: -.2px;
+            font-weight: 850;
+
+            letter-spacing: -.3px;
 
             margin: 5px;
 
-            width: 90%;
+            width: 92%;
 
-            min-height: 46px;
+            min-height: 48px;
 
             box-shadow:
-                0 7px 18px rgba(82,97,255,.25),
-                inset 0 1px 0 rgba(255,255,255,.25);
+                0 8px 20px
+                rgba(80,95,255,.25),
+
+                inset 0 1px 0
+                rgba(255,255,255,.25);
 
             transition:
                 transform .15s ease,
@@ -488,14 +668,17 @@
         }
 
         .btn::before {
+
             content: "";
 
             position: absolute;
 
             top: 0;
-            left: -100%;
+
+            left: -110%;
 
             width: 60%;
+
             height: 100%;
 
             background:
@@ -506,37 +689,48 @@
                     transparent
                 );
 
-            transform: skewX(-20deg);
+            transform:
+                skewX(-20deg);
 
-            transition: left .55s ease;
+            transition:
+                left .55s ease;
         }
 
         .btn:hover::before {
+
             left: 130%;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
+
+            transform:
+                translateY(-2px);
 
             box-shadow:
-                0 12px 25px rgba(82,97,255,.32),
-                inset 0 1px 0 rgba(255,255,255,.3);
+                0 13px 28px
+                rgba(80,95,255,.32),
 
-            filter: brightness(1.04);
+                inset 0 1px 0
+                rgba(255,255,255,.3);
+
+            filter:
+                brightness(1.04);
         }
 
         .btn:active {
+
             transform:
                 translateY(1px)
                 scale(.98);
-
-            box-shadow:
-                0 4px 10px rgba(82,97,255,.2);
         }
 
-        /* OPTIONS */
+
+        /* =========================================================
+           OPTIONS
+        ========================================================= */
 
         .options-container {
+
             width: 100%;
 
             display: flex;
@@ -545,69 +739,94 @@
 
             align-items: center;
 
-            margin-top: 5px;
+            margin-top: 6px;
         }
 
         .options-container .btn {
+
             animation:
                 optionAppear
-                .45s
+                .4s
                 cubic-bezier(.22,1,.36,1)
                 both;
         }
 
         .options-container .btn:nth-child(1) {
-            animation-delay: .05s;
+
+            animation-delay: .04s;
         }
 
         .options-container .btn:nth-child(2) {
-            animation-delay: .12s;
+
+            animation-delay: .1s;
         }
 
         .options-container .btn:nth-child(3) {
-            animation-delay: .19s;
+
+            animation-delay: .16s;
         }
 
         .options-container .btn:nth-child(4) {
-            animation-delay: .26s;
+
+            animation-delay: .22s;
         }
 
         @keyframes optionAppear {
+
             from {
+
                 opacity: 0;
+
                 transform:
-                    translateY(14px)
-                    scale(.96);
+                    translateY(12px)
+                    scale(.97);
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0)
                     scale(1);
             }
+
         }
 
-        /* START */
+
+        /* =========================================================
+           START SCREEN
+        ========================================================= */
+
+        #screen-start {
+
+            justify-content:
+                space-around;
+        }
 
         #screen-start > div {
+
             transition:
                 transform
-                .35s
+                .3s
                 cubic-bezier(.22,1,.36,1);
         }
 
         #screen-start > div:hover {
-            transform: scale(1.025);
+
+            transform:
+                scale(1.025);
         }
 
         #screen-start img {
+
             cursor: pointer;
 
             animation:
                 characterAppear
                 .7s
                 cubic-bezier(.22,1,.36,1),
+
                 startImageFloat
                 3.2s
                 ease-in-out
@@ -616,91 +835,242 @@
         }
 
         @keyframes startImageFloat {
+
             0%,100% {
-                transform: translateY(0);
+
+                transform:
+                    translateY(0);
             }
 
             50% {
-                transform: translateY(-9px);
+
+                transform:
+                    translateY(-9px);
             }
+
         }
 
-        /* QUIZ */
+
+        /* =========================================================
+           QUIZ SCREEN
+        ========================================================= */
 
         #screen-quiz {
-            justify-content: flex-start;
 
-            gap: 5px;
+            justify-content:
+                flex-start;
+
+            gap: 6px;
 
             overflow-y: auto;
+
             overflow-x: hidden;
 
-            padding-bottom: 5px;
+            padding:
+                4px
+                2px
+                8px;
 
             scrollbar-width: none;
         }
 
         #screen-quiz::-webkit-scrollbar {
+
             display: none;
         }
 
-        #quiz-title {
-            margin-bottom: 4px;
 
-            font-size: 19px;
+        /* =========================================================
+           QUIZ TITLE
+        ========================================================= */
+
+        #quiz-title {
+
+            width: 100%;
+
+            margin:
+                0
+                0
+                4px;
+
+            padding:
+                10px
+                14px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1f3ff,
+                    #f6f0ff
+                );
+
+            color: #5964dc;
+
+            font-size: 15px;
+
+            font-weight: 900;
+
+            letter-spacing: -.4px;
+
+            text-align: center;
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,.9);
+        }
+
+
+        /* =========================================================
+           QUIZ PROGRESS
+        ========================================================= */
+
+        #quiz-progress {
+
+            width: 94%;
+
+            margin:
+                2px
+                0
+                8px;
+        }
+
+        #progress-text {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            color: #7b8198;
+
+            text-align: right;
+        }
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 7px;
+
+            background: #e8eaf3;
+
+            border-radius: 999px;
+
+            overflow: hidden;
+        }
+
+        #progress-fill {
+
+            width: 25%;
+
+            height: 100%;
+
+            border-radius: 999px;
 
             background:
                 linear-gradient(
                     90deg,
-                    #4654ff,
-                    #963fff
+                    #5265ff,
+                    #824cff
                 );
 
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            color: transparent;
+            transition:
+                width .45s
+                cubic-bezier(.22,1,.36,1);
         }
+
+
+        /* =========================================================
+           QUIZ IMAGE
+        ========================================================= */
 
         #quiz-img {
-            max-height: 205px;
-            margin-bottom: 8px;
+
+            max-height: 200px;
+
+            margin:
+                2px
+                0
+                6px;
         }
+
+
+        /* =========================================================
+           QUIZ QUESTION
+        ========================================================= */
 
         #quiz-question {
-            margin-bottom: 8px;
+
+            width: 94%;
+
+            margin-bottom: 7px;
+
+            font-size: 17px;
+
+            font-weight: 850;
         }
 
+
+        /* =========================================================
+           FEEDBACK
+        ========================================================= */
+
         #quiz-feedback {
+
             animation:
                 feedbackAppear
                 .4s
                 cubic-bezier(.22,1,.36,1);
+
+            width: 94%;
+
+            font-size: 15px;
+
+            font-weight: 800;
         }
 
         @keyframes feedbackAppear {
+
             0% {
+
                 opacity: 0;
+
                 transform:
                     scale(.9)
-                    translateY(10px);
+                    translateY(8px);
             }
 
             70% {
-                transform: scale(1.02);
+
+                transform:
+                    scale(1.02);
             }
 
             100% {
+
                 opacity: 1;
+
                 transform:
                     scale(1)
                     translateY(0);
             }
+
         }
 
-        /* SHAKE */
+
+        /* =========================================================
+           SHAKE
+        ========================================================= */
 
         .shake {
+
             animation:
                 shake
                 .42s
@@ -708,38 +1078,55 @@
         }
 
         @keyframes shake {
+
             0%,100% {
-                transform: translateX(0);
+
+                transform:
+                    translateX(0);
             }
 
             20% {
-                transform: translateX(-8px);
+
+                transform:
+                    translateX(-8px);
             }
 
             40% {
-                transform: translateX(8px);
+
+                transform:
+                    translateX(8px);
             }
 
             60% {
-                transform: translateX(-5px);
+
+                transform:
+                    translateX(-5px);
             }
 
             80% {
-                transform: translateX(5px);
+
+                transform:
+                    translateX(5px);
             }
+
         }
 
-        /* RIPPLE */
+
+        /* =========================================================
+           RIPPLE
+        ========================================================= */
 
         .ripple {
+
             position: absolute;
 
             border-radius: 50%;
 
-            transform: scale(0);
+            transform:
+                scale(0);
 
             background:
-                rgba(255,255,255,.5);
+                rgba(255,255,255,.45);
 
             animation:
                 ripple
@@ -750,57 +1137,72 @@
         }
 
         @keyframes ripple {
+
             to {
-                transform: scale(4);
+
+                transform:
+                    scale(4);
+
                 opacity: 0;
             }
+
         }
 
-        /* MOBILE */
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
 
         @media (max-width: 480px) {
 
             body {
-                padding: 12px;
+
+                padding: 10px;
             }
 
             #game-container {
+
                 width: 100%;
 
                 height:
-                    calc(100dvh - 24px);
+                    calc(100dvh - 20px);
 
                 min-height: 0;
 
-                border-radius: 24px;
+                border-radius: 26px;
 
                 padding:
                     18px
-                    14px
-                    14px;
+                    13px
+                    13px;
             }
 
             h2 {
-                font-size: 27px;
+
+                font-size: 29px;
             }
 
             h3 {
-                font-size: 19px;
+
+                font-size: 20px;
             }
 
             img.character-img {
+
                 max-width:
                     min(220px,68vw);
 
-                max-height: 205px;
+                max-height: 200px;
             }
 
             #quiz-img {
-                max-height: 175px;
+
+                max-height: 170px;
             }
 
             .speech-bubble {
-                width: 94%;
+
+                width: 95%;
 
                 font-size: 15px;
 
@@ -810,7 +1212,8 @@
             }
 
             .btn {
-                width: 94%;
+
+                width: 95%;
 
                 min-height: 48px;
 
@@ -822,77 +1225,105 @@
             }
 
             .input-box {
-                width: 88%;
+
+                width: 90%;
 
                 font-size: 16px;
             }
+
         }
 
-        /* SMALL PHONE */
+
+        /* =========================================================
+           SMALL PHONE
+        ========================================================= */
 
         @media (max-height: 650px) {
 
             #game-container {
+
                 padding-top: 12px;
             }
 
             h2 {
-                margin: 3px 0;
+
+                margin:
+                    3px 0;
             }
 
             img.character-img {
-                max-height: 160px;
+
+                max-height: 155px;
             }
 
             #quiz-img {
-                max-height: 135px;
+
+                max-height: 125px;
             }
 
             .speech-bubble {
+
                 padding:
                     10px
                     12px;
             }
 
             .btn {
-                min-height: 42px;
+
+                min-height: 43px;
 
                 padding:
                     9px
                     14px;
             }
+
         }
 
-        /* TOUCH */
+
+        /* =========================================================
+           TOUCH
+        ========================================================= */
 
         @media (hover: none) {
 
             .btn:hover {
+
                 transform: none;
 
                 filter: none;
 
                 box-shadow:
-                    0 7px 18px rgba(82,97,255,.25),
-                    inset 0 1px 0 rgba(255,255,255,.25);
+                    0 8px 20px
+                    rgba(80,95,255,.25),
+
+                    inset 0 1px 0
+                    rgba(255,255,255,.25);
             }
 
             img.character-img:hover {
+
                 transform: none;
             }
 
             .btn:active {
-                transform: scale(.96);
+
+                transform:
+                    scale(.96);
             }
+
         }
 
-        /* REDUCED MOTION */
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
 
         @media (prefers-reduced-motion: reduce) {
 
             *,
             *::before,
             *::after {
+
                 animation-duration:
                     .01ms !important;
 
@@ -902,22 +1333,32 @@
                 transition-duration:
                     .01ms !important;
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
 
 <div id="game-container">
 
-    <!-- START 화면 -->
+
+    <!-- =========================================================
+         START
+    ========================================================= -->
 
     <div
         id="screen-start"
         class="screen active"
     >
 
-        <h2>승우 게임</h2>
+        <h2>
+            승우 게임
+        </h2>
+
 
         <div
             style="
@@ -931,6 +1372,7 @@
                 나를 눌러봐!
             </div>
 
+
             <img
                 src="photo1.png"
                 alt="첫번째 사진"
@@ -942,14 +1384,20 @@
     </div>
 
 
-    <!-- 이름 입력 -->
+
+    <!-- =========================================================
+         NAME INPUT
+    ========================================================= -->
 
     <div
         id="screen-name"
         class="screen"
     >
 
-        <h3>이름을 입력하시오</h3>
+        <h3>
+            이름을 입력하시오
+        </h3>
+
 
         <input
             type="text"
@@ -958,6 +1406,7 @@
             placeholder="이름 입력..."
             autocomplete="off"
         >
+
 
         <button
             class="btn"
@@ -969,7 +1418,10 @@
     </div>
 
 
-    <!-- 대화 -->
+
+    <!-- =========================================================
+         DIALOG
+    ========================================================= -->
 
     <div
         id="screen-dialog"
@@ -982,12 +1434,14 @@
             class="character-img"
         >
 
+
         <div
             id="dialog-text"
             class="speech-bubble"
         >
             하이, 내 이름은 이승우야. 만나서 반가워
         </div>
+
 
         <div
             id="dialog-options"
@@ -998,7 +1452,10 @@
     </div>
 
 
-    <!-- 퀴즈 -->
+
+    <!-- =========================================================
+         QUIZ
+    ========================================================= -->
 
     <div
         id="screen-quiz"
@@ -1009,6 +1466,27 @@
             문제
         </h3>
 
+
+        <!-- 진행률 -->
+
+        <div id="quiz-progress">
+
+            <span id="progress-text">
+                STAGE 1 / 4
+            </span>
+
+
+            <div class="progress-bar">
+
+                <div
+                    id="progress-fill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
         <img
             id="quiz-img"
             src=""
@@ -1016,12 +1494,14 @@
             class="character-img"
         >
 
+
         <div
             id="quiz-question"
             class="speech-bubble"
         >
             질문
         </div>
+
 
         <input
             type="text"
@@ -1031,12 +1511,14 @@
             autocomplete="off"
         >
 
+
         <button
             class="btn"
             onclick="submitAnswer()"
         >
             정답 제출
         </button>
+
 
         <div
             id="quiz-feedback"
@@ -1046,6 +1528,7 @@
                 margin-top:10px;
             "
         ></div>
+
 
         <button
             id="next-stage-btn"
@@ -1058,17 +1541,27 @@
 
     </div>
 
+
 </div>
 
 
+
 <script>
+
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
 
     let userName = "";
 
     let currentQuizStage = 1;
 
 
-    /* IMAGE */
+
+    /* =========================================================
+       IMAGE
+    ========================================================= */
 
     const images = {
 
@@ -1083,7 +1576,10 @@
     };
 
 
-    /* SCREEN TRANSITION */
+
+    /* =========================================================
+       SCREEN TRANSITION
+    ========================================================= */
 
     function showScreen(screenId) {
 
@@ -1092,13 +1588,20 @@
                 ".screen.active"
             );
 
+
         const nextScreen =
             document.getElementById(
                 screenId
             );
 
-        if (currentScreen === nextScreen)
+
+        if (
+            currentScreen === nextScreen
+        ) {
+
             return;
+
+        }
 
 
         if (currentScreen) {
@@ -1107,15 +1610,18 @@
                 "screen-exit"
             );
 
+
             setTimeout(() => {
 
                 currentScreen.classList.remove(
                     "active"
                 );
 
+
                 currentScreen.classList.remove(
                     "screen-exit"
                 );
+
 
                 nextScreen.classList.add(
                     "active"
@@ -1136,13 +1642,17 @@
     }
 
 
-    /* START */
+
+    /* =========================================================
+       START
+    ========================================================= */
 
     function goToNameInput() {
 
         showScreen(
             "screen-name"
         );
+
 
         setTimeout(() => {
 
@@ -1157,7 +1667,10 @@
     }
 
 
-    /* SAVE NAME */
+
+    /* =========================================================
+       SAVE NAME
+    ========================================================= */
 
     function saveName() {
 
@@ -1170,20 +1683,25 @@
                 .trim();
 
 
-        if (input === "") {
+        if (
+            input === ""
+        ) {
 
             alert(
                 "이름을 입력해 주세요!"
             );
+
 
             const inputBox =
                 document.getElementById(
                     "user-name-input"
                 );
 
+
             inputBox.classList.add(
                 "shake"
             );
+
 
             setTimeout(() => {
 
@@ -1192,6 +1710,7 @@
                 );
 
             }, 450);
+
 
             return;
 
@@ -1211,7 +1730,10 @@
     }
 
 
-    /* INITIAL DIALOG */
+
+    /* =========================================================
+       INITIAL DIALOG
+    ========================================================= */
 
     function setupInitialDialog() {
 
@@ -1230,6 +1752,7 @@
                 1. 반가워 내 이름은 ${userName}이야.
             </button>
 
+
             <button
                 class="btn"
                 onclick="chooseOption(2)"
@@ -1242,7 +1765,10 @@
     }
 
 
-    /* DIALOG */
+
+    /* =========================================================
+       DIALOG
+    ========================================================= */
 
     function chooseOption(optionNum) {
 
@@ -1251,13 +1777,16 @@
                 "dialog-text"
             );
 
+
         const optionsContainer =
             document.getElementById(
                 "dialog-options"
             );
 
 
-        if (optionNum === 1) {
+        if (
+            optionNum === 1
+        ) {
 
             dialogText.innerText =
                 `오 너 이름은 ${userName}이구나`;
@@ -1277,7 +1806,9 @@
         }
 
 
-        else if (optionNum === 2) {
+        else if (
+            optionNum === 2
+        ) {
 
             dialogText.innerText =
                 "말 좆같이 하네 고아새끼";
@@ -1299,7 +1830,10 @@
     }
 
 
-    /* BAD END */
+
+    /* =========================================================
+       BAD END
+    ========================================================= */
 
     function sayBadWord() {
 
@@ -1307,12 +1841,16 @@
             "대화가 종료되었습니다."
         );
 
+
         location.reload();
 
     }
 
 
-    /* QUESTION */
+
+    /* =========================================================
+       QUESTION
+    ========================================================= */
 
     function askQuestion() {
 
@@ -1320,6 +1858,7 @@
             document.getElementById(
                 "dialog-text"
             );
+
 
         const optionsContainer =
             document.getElementById(
@@ -1367,7 +1906,11 @@
     }
 
 
-    /* QUIZ DATA */
+
+    /* =========================================================
+       QUIZ DATA
+       기존 설정 그대로
+    ========================================================= */
 
     const quizzes = {
 
@@ -1513,15 +2056,20 @@
     };
 
 
-    /* START QUIZ */
+
+    /* =========================================================
+       START QUIZ
+    ========================================================= */
 
     function startQuiz() {
 
         currentQuizStage = 1;
 
+
         loadQuiz(
             currentQuizStage
         );
+
 
         showScreen(
             "screen-quiz"
@@ -1530,13 +2078,45 @@
     }
 
 
-    /* LOAD QUIZ */
+
+    /* =========================================================
+       LOAD QUIZ
+    ========================================================= */
 
     function loadQuiz(stage) {
 
         const quiz =
             quizzes[stage];
 
+
+        /* -------------------------
+           진행률
+        ------------------------- */
+
+        const progressText =
+            document.getElementById(
+                "progress-text"
+            );
+
+
+        const progressFill =
+            document.getElementById(
+                "progress-fill"
+            );
+
+
+        progressText.innerText =
+            `STAGE ${stage} / 4`;
+
+
+        progressFill.style.width =
+            `${(stage / 4) * 100}%`;
+
+
+
+        /* -------------------------
+           제목
+        ------------------------- */
 
         document
             .getElementById(
@@ -1546,6 +2126,11 @@
             quiz.title;
 
 
+
+        /* -------------------------
+           이미지
+        ------------------------- */
+
         document
             .getElementById(
                 "quiz-img"
@@ -1553,6 +2138,11 @@
             .src =
             quiz.image;
 
+
+
+        /* -------------------------
+           질문
+        ------------------------- */
 
         document
             .getElementById(
@@ -1562,12 +2152,27 @@
             quiz.question;
 
 
-        document
-            .getElementById(
-                "quiz-answer-input"
-            )
-            .value = "";
 
+        /* -------------------------
+           입력창 초기화
+        ------------------------- */
+
+        const input =
+            document.getElementById(
+                "quiz-answer-input"
+            );
+
+
+        input.value = "";
+
+
+        input.disabled = false;
+
+
+
+        /* -------------------------
+           피드백
+        ------------------------- */
 
         const feedback =
             document.getElementById(
@@ -1589,7 +2194,10 @@
             "none";
 
 
-        /* 이미지 애니메이션 */
+
+        /* -------------------------
+           이미지 애니메이션
+        ------------------------- */
 
         const img =
             document.getElementById(
@@ -1608,7 +2216,10 @@
             "characterAppear .65s cubic-bezier(.22,1,.36,1)";
 
 
-        /* 질문 애니메이션 */
+
+        /* -------------------------
+           질문 애니메이션
+        ------------------------- */
 
         const question =
             document.getElementById(
@@ -1627,20 +2238,24 @@
             "bubbleAppear .5s cubic-bezier(.22,1,.36,1)";
 
 
+
+        /* -------------------------
+           자동 포커스
+        ------------------------- */
+
         setTimeout(() => {
 
-            document
-                .getElementById(
-                    "quiz-answer-input"
-                )
-                .focus();
+            input.focus();
 
         }, 350);
 
     }
 
 
-    /* SUBMIT ANSWER */
+
+    /* =========================================================
+       SUBMIT ANSWER
+    ========================================================= */
 
     function submitAnswer() {
 
@@ -1677,17 +2292,24 @@
             );
 
 
-        /* 빈칸 */
 
-        if (inputAnswer === "") {
+        /* -------------------------
+           빈칸
+        ------------------------- */
+
+        if (
+            inputAnswer === ""
+        ) {
 
             alert(
                 "정답을 입력하세요!"
             );
 
+
             input.classList.add(
                 "shake"
             );
+
 
             setTimeout(() => {
 
@@ -1697,14 +2319,19 @@
 
             }, 450);
 
+
             input.focus();
+
 
             return;
 
         }
 
 
-        /* 피드백 표시 */
+
+        /* -------------------------
+           피드백 표시
+        ------------------------- */
 
         feedback.style.display =
             "block";
@@ -1721,9 +2348,10 @@
             "feedbackAppear .4s cubic-bezier(.22,1,.36,1)";
 
 
-        /* =====================================
+
+        /* =====================================================
            정답
-        ===================================== */
+        ===================================================== */
 
         if (
             quiz.answers.includes(
@@ -1734,8 +2362,6 @@
             feedback.innerText =
                 quiz.correctMsg;
 
-
-            /* 정답일 때만 다음 버튼 표시 */
 
             if (
                 currentQuizStage < 4
@@ -1758,16 +2384,15 @@
                 "block";
 
 
-            /* 정답 입력창 잠금 */
-
             input.disabled = true;
 
         }
 
 
-        /* =====================================
+
+        /* =====================================================
            오답
-        ===================================== */
+        ===================================================== */
 
         else {
 
@@ -1775,34 +2400,15 @@
                 quiz.wrongMsg;
 
 
-            /* ⭐ 핵심 ⭐ */
-
-            /*
-                틀렸을 때는 절대로
-                다음 문제 버튼을 보여주지 않는다.
-            */
-
             nextBtn.style.display =
                 "none";
 
 
-            /*
-                입력창을 다시 활성화
-            */
-
             input.disabled = false;
 
 
-            /*
-                기존 답 삭제
-            */
-
             input.value = "";
 
-
-            /*
-                오답 흔들림 효과
-            */
 
             input.classList.remove(
                 "shake"
@@ -1826,10 +2432,6 @@
             }, 450);
 
 
-            /*
-                다시 입력 가능
-            */
-
             setTimeout(() => {
 
                 input.focus();
@@ -1841,16 +2443,12 @@
     }
 
 
-    /* NEXT QUIZ */
+
+    /* =========================================================
+       NEXT QUIZ
+    ========================================================= */
 
     function nextQuizStage() {
-
-        /*
-            안전장치:
-
-            정답을 맞힌 상태에서만
-            다음 문제 버튼이 작동하도록 한다.
-        */
 
         const input =
             document.getElementById(
@@ -1859,9 +2457,8 @@
 
 
         /*
-            입력창이 비활성화되어 있지 않다면
-            아직 정답을 맞힌 상태가 아니므로
-            이동하지 않는다.
+            정답을 맞힌 상태가 아니면
+            다음 문제로 넘어가지 않음
         */
 
         if (
@@ -1879,6 +2476,7 @@
 
             currentQuizStage++;
 
+
             loadQuiz(
                 currentQuizStage
             );
@@ -1891,6 +2489,7 @@
                 "게임 클리어!! 승우와 결혼 축하합니다!! 승우: 우리 결혼은 당장 중국으로 떠날 것"
             );
 
+
             location.reload();
 
         }
@@ -1898,7 +2497,10 @@
     }
 
 
-    /* ENTER KEY SUPPORT */
+
+    /* =========================================================
+       ENTER KEY
+    ========================================================= */
 
     document.addEventListener(
         "keydown",
@@ -1906,8 +2508,11 @@
 
             if (
                 event.key !== "Enter"
-            )
+            ) {
+
                 return;
+
+            }
 
 
             const nameScreen =
@@ -1922,6 +2527,9 @@
                 );
 
 
+
+            /* 이름 입력 */
+
             if (
                 nameScreen.classList.contains(
                     "active"
@@ -1932,24 +2540,29 @@
 
             }
 
+
+
+            /* 퀴즈 */
+
             else if (
                 quizScreen.classList.contains(
                     "active"
                 )
             ) {
 
+                const input =
+                    document.getElementById(
+                        "quiz-answer-input"
+                    );
+
+
                 /*
-                    정답을 맞혀서
-                    입력창이 disabled라면
-                    Enter로 다음 문제로 가지 않음
+                    정답을 맞힌 뒤에는
+                    Enter로 다음 문제로 넘어가지 않음
                 */
 
                 if (
-                    !document
-                        .getElementById(
-                            "quiz-answer-input"
-                        )
-                        .disabled
+                    !input.disabled
                 ) {
 
                     submitAnswer();
@@ -1962,7 +2575,10 @@
     );
 
 
-    /* BUTTON RIPPLE */
+
+    /* =========================================================
+       BUTTON RIPPLE
+    ========================================================= */
 
     document.addEventListener(
         "click",
@@ -1974,8 +2590,11 @@
                 );
 
 
-            if (!button)
+            if (!button) {
+
                 return;
+
+            }
 
 
             const ripple =
@@ -2037,7 +2656,9 @@
         }
     );
 
+
 </script>
 
 </body>
 </html>
+```
